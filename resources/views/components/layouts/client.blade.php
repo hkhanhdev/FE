@@ -3,12 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
+    <title>Laptop Shop</title>
     @include("assets.css-js")
 </head>
 <body class="font-sans">
-
 {{$slot}}
-
 </body>
 </html>
