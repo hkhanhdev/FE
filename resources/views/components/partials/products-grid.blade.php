@@ -13,8 +13,14 @@
                 <img  class="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1674296115670-8f0e92b1fddb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Product Image" />
                 <div class="p-4" >
                     <h2 class="mb-2 text-lg font-bold text-gray-900">{{$product["name"]}}</h2>
-                    <p
-                        class="mb-2 text-base text-gray-700">{{$product['manufacturer']['name']}}</p>
+                    <div class="flex justify-between">
+                        <p class="mb-2 text-base text-gray-700">{{$product['manufacturer']['name']}}</p>
+                        @if($product['quantity'] <=  0)
+                            <div class="px-2 bg-red-600 w-fit rounded-xl h-6">
+                                <p class="text-white">Out of stock</p>
+                            </div>
+                        @endif
+                    </div>
                     <div class="flex items-center">
                         <p class="mr-2 text-lg font-semibold text-gray-900 ">${{$product["price"]}}</p>
                         <p class="text-base  font-medium text-gray-500 line-through ">$250.0</p>

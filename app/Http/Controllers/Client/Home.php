@@ -48,8 +48,6 @@ class Home extends Controller
         $manus_full_response = Http::get("http://localhost:8000/api/v1/manufacturers?perPage=30");
         $manus = $manus_full_response->json()['data'];
 //        dd($products);
-//        dd($response->json());
-//        dd(Http::get("http://localhost:8000/api/v1/products").json());
         return view("pages.welcome",["products"=>$products,"manus" => $manus]);
     }
 }
