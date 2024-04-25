@@ -7,7 +7,7 @@
                 x-transition:leave-start="opacity-100"
                 x-transition:leave-end="opacity-0"
                 >
-            <img :src="image" alt="Image" class="absolute inset-0 z-10 h-full w-full object-cover opacity-70" />
+            <img :src="image" alt="Image" class="absolute inset-0 z-10 h-full w-full object-cover " />
         </figure>
     </template>
 
@@ -34,11 +34,11 @@
         Alpine.data('slider', () => ({
             currentIndex: 1,
             images: [
-                'https://picsum.photos/1600/384',
-                'https://picsum.photos/1600/384',
-                'https://picsum.photos/1600/384',
-                'https://picsum.photos/1600/384',
-                'https://source.unsplash.com/1600x900/?textures&patterns'
+                'https://ik.imagekit.io/ui8hp7fk3h/z5382791584234_2fcc6f5c04331778db10a88a0e33deaf.jpg?updatedAt=1714040309398',
+                'https://ik.imagekit.io/ui8hp7fk3h/z5382791584856_14d736a94a6f835b0e992110f38d2a61.jpg?updatedAt=1714040309083',
+                'https://ik.imagekit.io/ui8hp7fk3h/z5382791573511_8647b4c8506472d185a604fc9f32c061.jpg?updatedAt=1714040308972',
+                'https://ik.imagekit.io/ui8hp7fk3h/z5382791573458_8f715f4c6cde4549d2034b63a27c83ae.jpg?updatedAt=1714040308956',
+                'https://ik.imagekit.io/ui8hp7fk3h/z5382791563216_e9a04bf196144560239538abbbcc1b0f.jpg?updatedAt=1714040308825'
             ],
             back() {
                 if (this.currentIndex > 1) {
