@@ -17,21 +17,17 @@ Route::get('/product',[\App\Http\Controllers\Client\Home::class,'productDetails'
 
 Route::get('/products',[\App\Http\Controllers\Client\Home::class,"productsByCate"]);
 
-Route::get('/cart',function (){
-    return view('pages.cart');
-})->name('cart');
+Route::get('/cart',[\App\Http\Controllers\Client\Home::class,"cart"])->name('cart');
 
 Route::get('/check_out',function (){
     return view('pages.check_out');
 })->name('checkout');
 
-Route::get('/order_history',function (){
-    return view('pages.order_history');
-})->name('order_history');
+Route::get('/order_history',[\App\Http\Controllers\Client\Home::class,'order_history'])->name('order_history');
 
-Route::get('/profile',function (){
-    return view('pages.user_profile');
-})->name('profile');
+Route::get('/profile',[\App\Http\Controllers\Client\Home::class,'profile'])->name('profile');
+
+Route::get('/logout',[\App\Http\Controllers\Client\Home::class,"logout"]);
 
 Route::fallback(function () {
     return view("pages.fallback");

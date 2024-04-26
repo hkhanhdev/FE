@@ -31,11 +31,12 @@
                         </span>
                     </div>
                     @error('email')
-                    <div class="text-red-600 font-semibold">{{ $message }}</div>
+                    <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    >{{ $message }}</div>
                     @enderror
-                    @if(session('email_taken'))
-                        <div class="text-red-600 font-semibold">{{session('email_taken')}}</div>
-                    @endif
                 </div>
 
                 <div>
@@ -49,9 +50,29 @@
                         />
                     </div>
                     @error('password')
-                    <div class="text-red-600 font-semibold">{{ $message }}</div>
+                    <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    >{{ $message }}</div>
                     @enderror
                 </div>
+
+                @if(session('auth_failed'))
+                    <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    >{{ session('auth_failed') }}</div>
+                @endif
+                @if(session('auth_success'))
+                    <div x-data="{ countdown: 2 }" x-init="setTimeout(() => window.location.href = '{{ route('home') }}', 1500)">
+                        <div class="text-green-600 font-semibold">{{ session('auth_success') }}</div>
+                        <div>
+                            <p>Redirecting to home page in <span x-text="countdown"></span> seconds...</p>
+                        </div>
+                    </div>
+                @endif
 
                 <button
                     type="submit"

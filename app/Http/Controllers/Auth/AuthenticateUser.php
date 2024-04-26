@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AuthenticateUser extends Controller
 {
@@ -23,6 +24,18 @@ class AuthenticateUser extends Controller
     public function authenticate(Request $request)
     {
         $authenticated = $request->validate($this->rules,$this->messages);
+//        dd($authenticated);
+        $response = Http::post("http://localhost:8000/api/v1/login",
+            ['email'=>$authenticated['email'],
+            'password'=>$authenticated['password']])->json();
+        if (isset($response['error'])) {
+            session()->flash("auth_failed","Your provided credentials are not accessible!");
+        }else {
+            session()->flash("auth_success","Logged in successfully!");
+            $access_token = $response['access_token'];
+            session()->put("access_token",$access_token);
+        }
+
         return view("pages.sign_in");
     }
 }

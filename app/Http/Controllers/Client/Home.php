@@ -60,5 +60,29 @@ class Home extends Controller
         $manus = $manus_full_response->json()['data'];
         return view("pages.welcome",["products"=>$products,"manus" => $manus]);
     }
+    public function logout()
+    {
+        $response = Http::post("http://localhost:8000/api/v1/logout",['token'=>session()->get("access_token")])->json();
+//        if ($response['message']) {
+        session()->flush();
+//        }
+        return redirect()->route('home');
+    }
 
+    public function profile()
+    {
+        $response = Http::get("http://localhost:8000/api/v1/user",['token'=>session()->get("access_token")])->json();
+//        dd($response);
+        return view('pages.user_profile',['user_info'=>$response['data']]);
+    }
+
+    public function cart()
+    {
+        return view("pages.cart");
+    }
+
+    public function order_history()
+    {
+        return view("pages.order_history");
+    }
 }
