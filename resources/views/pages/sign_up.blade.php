@@ -13,6 +13,32 @@
                 <p class="text-center text-lg font-medium">Sign up</p>
 
                 <div>
+                    <label for="username" class="sr-only">Username</label>
+                    <div class="relative">
+                        <input
+                            type="text"
+                            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                            placeholder="Enter your username"
+                            name="username"
+                            value="{{old("username")}}"
+                        />
+
+                        <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 text-gray-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+</svg>
+                      </span>
+                    </div>
+                    @error('username')
+                    <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    >{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div>
                     <label for="email" class="sr-only">Email</label>
                     <div class="relative">
                         <input
@@ -30,10 +56,18 @@
                       </span>
                     </div>
                     @error('email')
-                    <div class="text-red-600 font-semibold">{{ $message }}</div>
+                    <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    >{{ $message }}</div>
                     @enderror
                     @if(session('email_taken'))
-                        <div class="text-red-600 font-semibold">{{session('email_taken')}}</div>
+                        <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                             x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                        >{{ session('email_taken') }}</div>
                     @endif
                 </div>
 
@@ -54,10 +88,18 @@
           </span>
                     </div>
                     @error('phone')
-                    <div class="text-red-600 font-semibold">{{ $message }}</div>
+                    <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    >{{ $message }}</div>
                     @enderror
                     @if(session('phone_taken'))
-                        <div class="text-red-600 font-semibold">{{session('phone_taken')}}</div>
+                        <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                             x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                             x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                             x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                        >{{ session("phone_taken") }}</div>
                     @endif
                 </div>
 
@@ -72,7 +114,11 @@
                         />
                     </div>
                     @error('password')
-                    <div class="text-red-600 font-semibold">{{ $message }}</div>
+                    <div class="text-red-600 font-semibold" x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+                         x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                         x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                    >{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -87,6 +133,14 @@
                         />
                     </div>
                 </div>
+                @if(session('register'))
+                <div x-data="{ countdown: 2 }" x-init="setTimeout(() => window.location.href = '{{ route('sign_in') }}', countdown * 1000)">
+                        <div class="text-green-600 font-semibold">{{ session('register') }}</div>
+                    <div>
+                        <p>Redirecting to login page in <span x-text="countdown"></span> seconds...</p>
+                    </div>
+                </div>
+                @endif
 
                 <button
                     type="submit"
