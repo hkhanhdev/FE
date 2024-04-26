@@ -11,7 +11,7 @@ class Register extends Controller
     protected $rules = [
         'email' => ['required','email','ends_with:gmail.com'],
         'phone' => ['required','regex:/^(?:\+84|0)?[1-9]\d{8,9}$/'],
-        'password' => 'required|string|min:6|confirmed'
+        'password' => 'required|string|min:8|confirmed'
     ];
 
     protected $messages = [
@@ -22,7 +22,7 @@ class Register extends Controller
         'phone.regex' => 'Please enter a valid phone number!',
         'password.required' => 'Please enter your password!',
         'password.confirmed' => 'The password confirmation does not match!',
-        'password.min' => 'Password must have more than 6 characters!',
+        'password.min' => 'Password must have more than 8 characters!',
     ];
 
     public function registeringUser(Request $request)
