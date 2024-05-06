@@ -32,8 +32,6 @@ class Register extends Controller
     public function registeringUser(Request $request)
     {
         $validatedData = $request->validate($this->rules,$this->messages);
-
-//        session()->flash("phone_taken","This phone number is already taken!");
 //        dd($validatedData);
         $response = Http::post("http://localhost:8000/api/v1/register",
             ["name"=>$validatedData['username'],
@@ -44,11 +42,13 @@ class Register extends Controller
         ])->json();
 //        dd($response);
         if (isset($response['errors'])) {
-            if ($response['errors']['email']) {
-                session()->flash("email_taken",$response['errors']['email'][0]);
+            if (isset($response['errors']['email'])) {
+//                session()->flash("email_taken",$response['errors']['email'][0]);
+                $request->session()->now("email_taken",$response['errors']['email'][0]);
             }
-            if ($response['errors']['phone_number']) {
-                session()->flash("phone_taken",$response['errors']['phone_number'][0]);
+            if (isset($response['errors']['phone_number'])) {
+//                session()->flash("phone_taken",$response['errors']['phone_number'][0]);
+                $request->session()->now("phone_taken",$response['errors']['phone_number'][0]);
             }
         }else {
             session()->flash("register","Successfully registered!");

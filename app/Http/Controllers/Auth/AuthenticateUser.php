@@ -29,9 +29,11 @@ class AuthenticateUser extends Controller
             ['email'=>$authenticated['email'],
             'password'=>$authenticated['password']])->json();
         if (isset($response['error'])) {
-            session()->flash("auth_failed","Your provided credentials are not accessible!");
+//            session()->flash("auth_failed","Your provided credentials are not accessible!");
+            $request->session()->now("auth_failed","Your provided credentials are not accessible!");
         }else {
-            session()->flash("auth_success","Logged in successfully!");
+//            session()->flash("auth_success","Logged in successfully!");
+            $request->session()->now("auth_success","Logged in successfully!");
             $access_token = $response['access_token'];
             session()->put("access_token",$access_token);
         }
