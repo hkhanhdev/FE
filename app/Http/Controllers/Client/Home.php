@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class Home extends Controller
 {
+    protected $rules = [
+        'username' => ['min:8','max:100'],
+        'email' => ['required','email','ends_with:gmail.com'],
+        'address' => [],
+        'gender' => ['required']
+    ];
+
+    protected $messages = [
+        'email.required' => "Email field cannot be empty!",
+        'email.email' => "Please enter a valid email address!",
+        'email.ends_with' => "Please enter an email address with valid domain!",
+        'username.min' => 'Username must have more than 8 characters!',
+        'username.max' => 'Username must have less than 100 characters!',
+    ];
 
     public function toSignIn()
     {
@@ -73,7 +87,30 @@ class Home extends Controller
     {
         $response = Http::get("http://localhost:8000/api/v1/user",['token'=>session()->get("access_token")])->json();
 //        dd($response);
+        session()->put('user_info',$response['data']);
         return view('pages.user_profile',['user_info'=>$response['data']]);
+    }
+
+    public function updateInfo(Request $request)
+    {
+        $user_info = session()->get('user_info');
+        $validated = $request->validate($this->rules,$this->messages);
+        $response = Http::post("http://localhost:8000/api/v1/update",
+            [   'token' => session()->get("access_token"),
+                "name"=>$validated['username'],
+                "email"=>$validated['email'],
+                'address' => $validated['address'],
+                'genders' => $validated['gender']
+            ])->json();
+        if (isset($response['errors'])) {
+            if (isset($response['errors']['email'])) {
+                $request->session()->now("email_taken",$response['errors']['email'][0]);
+            }
+            return view("pages.user_profile",['user_info'=>$user_info]);
+        }else {
+            $request->session()->now("updateProfileSuccess","Updated!");
+            return view("pages.user_profile",['user_info'=>$user_info]);
+        }
     }
 
     public function cart()

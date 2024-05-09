@@ -26,6 +26,7 @@ Route::get('/check_out',function (){
 Route::get('/order_history',[\App\Http\Controllers\Client\Home::class,'order_history'])->name('order_history');
 
 Route::get('/profile',[\App\Http\Controllers\Client\Home::class,'profile'])->name('profile');
+Route::post('/profile',[\App\Http\Controllers\Client\Home::class,'updateInfo']);
 
 Route::get('/logout',[\App\Http\Controllers\Client\Home::class,"logout"]);
 
