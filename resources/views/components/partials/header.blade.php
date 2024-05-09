@@ -1,7 +1,7 @@
 <div class=" w-full">
     <div x-data="{ open: false }" class="flex flex-col max-w-screen-xl p-5 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
         <div class="flex flex-row items-center justify-between lg:justify-start">
-            <a class="text-lg font-bold tracking-tighter text-blue-600 transition duration-500 ease-in-out transform tracking-relaxed lg:pr-8" href="/groups/header/"> LaptopS </a>
+            <a class="text-lg font-bold tracking-tighter text-blue-600 transition duration-500 ease-in-out transform tracking-relaxed lg:pr-8" href="/"> LaptopS </a>
             <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
                 <svg fill="currentColor" viewBox="0 0 20 20" class="w-20 h-20">
                     <path x-show="!open" fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"></path>
@@ -27,7 +27,6 @@
                     </button>
                     <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 z-30 w-full mt-2 origin-top-right md:w-48" style="display: none">
                         <div class="px-2 py-2 bg-white rounded-md shadow ml-10">
-                            <hr class="border-gray-200 ">
                             <a class="block px-2 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-blue-600 focus:outline-none focus:shadow-outline" href="profile">
                                 <div class="flex gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
@@ -56,7 +55,6 @@
                                     </svg>
                                     <span>Order history</span>
                                 </div>
-
                             </a>
                             <hr class="border-gray-200 ">
                             <a class="block px-2 py-2 mt-2 text-sm text-gray-500 md:mt-0 hover:text-red-500 focus:outline-none focus:shadow-outline" href="logout">
