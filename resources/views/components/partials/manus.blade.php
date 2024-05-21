@@ -95,7 +95,7 @@
                     @foreach($manus["pagination_data"] as $manu)
                         <div @click="viewProductByManu('{{$manu['id']}}','{{$manu['name']}}')"
                             class="ml-4 hover:bg-blue-400 hover:cursor-pointer flex-auto flex-grow-0 flex-shrink-0 w-48 rounded-lg bg-gray-100 items-center justify-center snap-center overflow-hidden shadow-md">
-                            <img src="https://picsum.photos/400/200">
+                            <img src="{{$manu['image']}}" class="h-36 w-full">
                             <div class="px-2 py-3 flex justify-center">
                                 <div class="text-lg font-semibold">{{$manu['name']}}</div>
                             </div>

@@ -24,21 +24,21 @@
         @forelse($products["pagination_data"] as $product)
             <div class="mx-auto mt-11 w-80 transform overflow-hidden rounded-lg bg-gray-100 duration-300 hover:scale-105 hover:shadow-lg hover:cursor-pointer"
                  @click="viewProduct('{{$product['id']}}')">
-                <img  class="h-48 w-full object-cover object-center" src="https://images.unsplash.com/photo-1674296115670-8f0e92b1fddb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="Product Image" />
+                <img  class="h-64 w-full object-cover object-center p-2" src="{{$product["image"]}}" alt="Product Image" />
                 <div class="p-4" >
                     <h2 class="mb-2 text-lg font-bold text-gray-900">{{$product["name"]}}</h2>
                     <div class="flex justify-between">
                         <p class="mb-2 text-base text-gray-700">{{$product['manufacturer']['name']}}</p>
-                        @if($product['quantity'] <=  0)
-                            <div class="px-2 bg-red-600 w-fit rounded-xl h-6">
-                                <p class="text-white">Out of stock</p>
+{{--                        @if($product['quantity'] <=  0)--}}
+                            <div class="px-2 bg-green-600 w-fit rounded-xl h-6">
+                                <p class="text-white">In stock</p>
                             </div>
-                        @endif
+{{--                        @endif--}}
                     </div>
                     <div class="flex items-center">
-                        <p class="mr-2 text-lg font-semibold text-gray-900 ">${{$product["price"]}}</p>
-                        <p class="text-base  font-medium text-gray-500 line-through ">$250.0</p>
-                        <p class="ml-auto text-base font-medium text-green-500">20% off</p>
+                        <p class="mr-2 text-lg font-semibold text-gray-900 ">${{$product["selling_price"]}}</p>
+                        <p class="text-base font-medium text-gray-500 line-through ">${{round($product["original_price"], 2)}}</p>
+                        <p class="ml-auto text-base font-medium text-green-500">10% off</p>
                     </div>
                 </div>
             </div>

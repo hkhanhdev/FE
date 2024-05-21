@@ -3,12 +3,12 @@
         <div class="grid items-start grid-cols-1 lg:grid-cols-5 gap-12 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] p-6">
             <div class="lg:col-span-3 w-full lg:sticky top-0 text-center">
                 <div class="px-4 py-10 rounded-xl shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative flex justify-center">
-                    <img src="https://readymadeui.com/images/laptop5.webp" alt="Product" class="w-4/5 rounded object-cover" />
+                    <img src="{{$product["image"]}}" alt="Product" class="w-4/5 rounded object-cover" />
                 </div>
-                <div class="mt-6 flex flex-wrap flex-col justify-center mx-auto" x-data="{ count: 1,price:{{$product['price']}}}" >
+                <div class="mt-6 flex flex-wrap flex-col justify-center mx-auto" x-data="{ count: 1,price:{{$product['selling_price']}}}" >
                     <h2 class="text-3xl font-extrabold text-[#333]">{{$product['name']}}</h2>
                     <div class="flex gap-4 mt-2 justify-center">
-                        <p class="text-[#333] text-2xl font-bold" x-text="'$'+count*price"></p>
+                        <p class="text-[#333] text-2xl font-bold" x-text="'$' + (count * price).toFixed(2)"></p>
                     </div>
                     <div class="my-2">
                         <button x-on:click="count = count > 1 ? count-1 : count" class="w-10 bg-red-400 rounded-md">-</button>
@@ -37,14 +37,14 @@
                     <h3 class="text-lg font-bold text-[#333]">Product information</h3>
                     <ul class="mt-6 space-y-6 text-[#333]">
                         <li class="text-sm">TYPE <span class="ml-4 float-right">LAPTOP</span></li>
-                        <li class="text-sm">RAM <span class="ml-4 float-right">16 BG</span></li>
-                        <li class="text-sm">SSD <span class="ml-4 float-right">1000 BG</span></li>
-                        <li class="text-sm">PROCESSOR TYPE <span class="ml-4 float-right">INTEL CORE I7-12700H</span></li>
+                        <li class="text-sm">RAM <span class="ml-4 float-right">{{$product["ram"]}}</span></li>
+                        <li class="text-sm">STORAGE <span class="ml-4 float-right">{{$product["storage"]}}</span></li>
+                        <li class="text-sm">PROCESSOR TYPE <span class="ml-4 float-right">{{$product["processor"]}}</span></li>
                         <li class="text-sm">PROCESSOR SPEED <span class="ml-4 float-right">2.3 - 4.7 GHz</span></li>
-                        <li class="text-sm">DISPLAY SIZE INCH <span class="ml-4 float-right">16.0</span></li>
-                        <li class="text-sm">DISPLAY SIZE SM <span class="ml-4 float-right">40.64 cm</span></li>
-                        <li class="text-sm">DISPLAY TYPE <span class="ml-4 float-right">OLED, TOUCHSCREEN, 120 Hz</span></li>
-                        <li class="text-sm">DISPLAY RESOLUTION <span class="ml-4 float-right">2880x1620</span></li>
+                        <li class="text-sm">DISPLAY SIZE INCH <span class="ml-4 float-right">{{$product["display"]}}</span></li>
+                        <li class="text-sm">DISPLAY SIZE SM <span class="ml-4 float-right">{{$product["display"]*2.54}}</span></li>
+                        <li class="text-sm">DISPLAY TYPE <span class="ml-4 float-right">OLED,100 Hz</span></li>
+                        <li class="text-sm">DISPLAY RESOLUTION <span class="ml-4 float-right">1920x1080</span></li>
                         <li class="text-sm">RATE <span class="ml-4 float-right flex"><svg class="w-5 fill-[#333]" viewBox="0 0 14 13" fill="none"
                                                                                           xmlns="http://www.w3.org/2000/svg">
                                 <path
