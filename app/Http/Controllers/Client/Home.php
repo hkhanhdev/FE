@@ -116,6 +116,10 @@ class Home extends Controller
 
     public function order_history()
     {
-        return view("pages.order_history");
+        $orders_endpoint = "http://localhost:8000/api/v1/orders";
+        $get_orders = Http::get($orders_endpoint,['token'=>session()->get("access_token")])->json();
+//        dd($get_orders['data']);
+//        dd(json_decode($get_orders['data']['pagination_data']['products_cart'],true));
+        return view("pages.order_history",['orders'=>$get_orders['data']]);
     }
 }
