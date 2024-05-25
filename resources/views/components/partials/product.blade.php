@@ -28,8 +28,15 @@
                     {{--                            </div>--}}
                     {{--                        </div>--}}
                     <div class="flex justify-center mt-2">
-                        <button type="button" class="min-w-[200px] px-4 py-3 bg-blue-600 hover:bg-blue-800 hover:scale-105 duration-200 text-white text-sm font-bold rounded">Add to cart</button>
-                    </div>
+                        <form action="{{ url('/cart') }}" method="POST">
+                            @csrf
+                            @method('PUT')
+{{--                            <input type="hidden" name="">--}}
+                            <input type="hidden" name="prd_id" value="{{$product['id']}}">
+                            <input type="hidden" name="quantity" x-model="count">
+                            <button type="submit" class="min-w-[200px] px-4 py-3 bg-blue-600 hover:bg-blue-800 hover:scale-105 duration-200 text-white text-sm font-bold rounded">Add to cart</button>
+                        </form>
+                         </div>
                 </div>
             </div>
             <div class="lg:col-span-2">
