@@ -17,11 +17,14 @@ Route::get('/product',[\App\Http\Controllers\Client\Home::class,'productDetails'
 
 Route::get('/products',[\App\Http\Controllers\Client\Home::class,"productsByCate"]);
 
-Route::get('/cart',[\App\Http\Controllers\Client\Home::class,"cart"])->name('cart');
-
+Route::get('/cart',[\App\Http\Controllers\Client\Cart::class,"render_cart"])->name('cart');
+Route::put('/cart',[\App\Http\Controllers\Client\Cart::class,"update_cart"]);
+Route::delete('/cart',[\App\Http\Controllers\Client\Cart::class,"remove_item"]);
+Route::post('/cart',[\App\Http\Controllers\Client\Cart::class,"to_check_out"]);
 Route::get('/check_out',function (){
     return view('pages.check_out');
 })->name('checkout');
+Route::post('/check_out',[\App\Http\Controllers\Client\Cart::class,"cf_check_out"]);
 
 Route::get('/order_history',[\App\Http\Controllers\Client\Home::class,'order_history'])->name('order_history');
 

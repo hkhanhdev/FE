@@ -41,6 +41,7 @@ class Home extends Controller
         $prd_id = $request->query("product_id");
         $product_full_response = Http::get("http://localhost:8000/api/v1/products/$prd_id");
         $product = $product_full_response->json()["data"];
+//        dd($product);
         return view('pages.product_details',['product'=>$product]);
     }
 
@@ -111,11 +112,6 @@ class Home extends Controller
             $request->session()->now("updateProfileSuccess","Updated!");
             return view("pages.user_profile",['user_info'=>$user_info]);
         }
-    }
-
-    public function cart()
-    {
-        return view("pages.cart");
     }
 
     public function order_history()
