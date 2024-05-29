@@ -51,9 +51,15 @@ class Cart extends Controller
     }
     public function update_cart(Request $request)
     {
+        $current_cartID = 0 ;
         $prd_id = $request->input("prd_id");
         $quantity = $request->input("quantity");
-        $current_cartID = $this->getCartID();
+        if ($this->getCartID() == null){
+            $new_cart = $this->initCart();
+            $current_cartID = $this->getCartID();
+        }else {
+            $current_cartID = $this->getCartID();
+        }
         $update_res = Http::put($this->update_endpoint.$current_cartID,['token'=>session()->get("access_token"),'products'=>[$prd_id=>$quantity]])->json();
         return redirect()->route("cart");
 
