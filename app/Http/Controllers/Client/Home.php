@@ -57,7 +57,7 @@ class Home extends Controller
     }
     public function home()
     {
-        $products_full_response = Http::get("http://localhost:8000/api/v1/products?perPage=10");
+        $products_full_response = Http::get("http://localhost:8000/api/v1/products?perPage=8");
         $products = $products_full_response->json()["data"];
         $manus_full_response = Http::get("http://localhost:8000/api/v1/manufacturers?perPage=30");
         $manus = $manus_full_response->json()['data'];
