@@ -36,7 +36,7 @@
 {{--                        @endif--}}
                     </div>
                     <div class="flex items-center">
-                        <p class="mr-2 text-lg font-semibold text-gray-900 ">${{$product["selling_price"]}}</p>
+                        <p class="mr-2 text-lg font-semibold text-gray-900 ">${{round($product["selling_price"], 2)}}</p>
                         <p class="text-base font-medium text-gray-500 line-through ">${{round($product["original_price"], 2)}}</p>
                         <p class="ml-auto text-base font-medium text-green-500">10% off</p>
                     </div>
