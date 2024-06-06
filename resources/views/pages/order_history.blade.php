@@ -62,7 +62,7 @@
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
 
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['name']}}</td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['user_name']}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$order['phone_number']}}</td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['address']}}</td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['status_order']}}</td>
