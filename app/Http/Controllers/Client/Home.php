@@ -110,7 +110,7 @@ class Home extends Controller
             return view("pages.user_profile",['user_info'=>$user_info]);
         }else {
             $request->session()->now("updateProfileSuccess","Updated!");
-            return view("pages.user_profile",['user_info'=>$user_info]);
+            return redirect()->route("profile");
         }
     }
 
