@@ -6,7 +6,7 @@ Route::get('/',[\App\Http\Controllers\Client\Home::class,"home"])->name('home');
 Route::get('/all',[\App\Http\Controllers\Client\Home::class,"pagination"]);
 
 Route::get('/sign_in',[\App\Http\Controllers\Client\Home::class,"toSignIn"])->name('sign_in');
-Route::post('/sign_in',[\App\Http\Controllers\Auth\AuthenticateUser::class,"authenticate"])->middleware(['authenticated']);
+Route::post('/sign_in',[\App\Http\Controllers\Auth\AuthenticateUser::class,"authenticate"]);
 
 Route::get('/sign_up',[\App\Http\Controllers\Client\Home::class,"toSignUp"])->name('sign_up');
 Route::post('/sign_up',[\App\Http\Controllers\Auth\Register::class,"registeringUser"]);
