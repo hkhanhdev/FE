@@ -27,6 +27,7 @@ Route::get('/check_out',function (){
 Route::post('/check_out',[\App\Http\Controllers\Client\Cart::class,"cf_check_out"])->middleware(['authenticated']);
 
 Route::get('/order_history',[\App\Http\Controllers\Client\Home::class,'order_history'])->name('order_history')->middleware(['authenticated']);
+Route::post("/order_history",[\App\Http\Controllers\Client\Home::class,'updateOrdStatus'])->middleware(['authenticated']);
 
 Route::get('/profile',[\App\Http\Controllers\Client\Home::class,'profile'])->name('profile')->middleware(['authenticated']);
 Route::post('/profile',[\App\Http\Controllers\Client\Home::class,'updateInfo'])->middleware(['authenticated']);

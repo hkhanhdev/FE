@@ -69,7 +69,7 @@ class Home extends Controller
     {
 //        dd($request);
         $page = $request->query('page');
-        $products_full_response = Http::get("http://localhost:8000/api/v1/products?page=$page&perPage=10");
+        $products_full_response = Http::get("http://localhost:8000/api/v1/products?page=$page&perPage=8");
         $products = $products_full_response->json()["data"];
         $manus_full_response = Http::get("http://localhost:8000/api/v1/manufacturers?perPage=30");
         $manus = $manus_full_response->json()['data'];
@@ -92,6 +92,12 @@ class Home extends Controller
         return view('pages.user_profile',['user_info'=>$response['data']]);
     }
 
+    public function updateOrdStatus(Request $request)
+    {
+        $cre = $request->only(['ord_id','mode']);
+
+        return redirect()->route('order_history');
+    }
     public function updateInfo(Request $request)
     {
         $user_info = session()->get('user_info');

@@ -8,15 +8,12 @@
                 <div class="mb-5">
                     <span class="text-3xl font-semibold">Order History</span>
                 </div>
-                <div class="overflow-x-auto w-10/12">
+                <div class="overflow-x-auto w-11/12">
                     <table class="min-w-full">
                         <thead class="bg-gray-200 border-b">
                         <tr>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Order ID
-                            </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                ProductID
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Image
@@ -25,7 +22,7 @@
                                 Product Name
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Manufacturer Name
+                                Manufacturer
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Price
@@ -34,7 +31,7 @@
                                 Quantity
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                Total cost
+                                Total
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Customer Name
@@ -48,6 +45,9 @@
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                 Status
                             </th>
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -57,7 +57,6 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"></td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"></td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"></td>
@@ -65,12 +64,48 @@
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['user_name']}}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$order['phone_number']}}</td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['address']}}</td>
-                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['status_order']}}</td>
+                                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                    @if($order['status_order'] == 1)
+                                        <button class="bg-yellow-400 rounded-full w-20 hover:cursor-auto">Pending</button>
+                                    @elseif($order['status_order'] == 2)
+                                        <button class="bg-green-400 rounded-full w-20 hover:cursor-auto">Delivering</button>
+                                    @elseif($order['status_order'] == 3)
+                                        <button class="bg-green-400 rounded-full w-20 hover:cursor-auto">Delivered</button>
+                                    @elseif($order['status_order'] == 4)
+                                        <button class="bg-green-500 rounded-full w-20 hover:cursor-auto">Completed</button>
+                                    @elseif($order['status_order'] == 5)
+                                        <button class="bg-red-500 rounded-full w-20 hover:cursor-auto">Canceled</button>
+                                    @endif
+                                </td>
+                                <td>
+                                    <form action="/order_history" method="POST" class="flex gap-2">
+                                        @csrf
+                                        <input type="hidden" value="{{$order['id']}}" name="ord_id">
+                                        @if($order['status_order'] == 1)
+                                            <input type="hidden" value="5" name="mode">
+                                            <button type="submit" class="bg-red-400 rounded-full w-20 hover:scale-105">Cancel</button>
+                                            <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
+                                        @elseif($order['status_order'] == 2)
+                                            <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
+                                            <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
+                                        @elseif($order['status_order'] == 3)
+                                            <input type="hidden" value="4" name="mode">
+                                            <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
+                                            <button type="submit" class="bg-green-400 rounded-full w-20 hover:scale-105">Received</button>
+                                        @elseif($order['status_order'] == 4)
+                                            <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
+                                            <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
+                                        @elseif($order['status_order'] == 5)
+                                            <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
+                                            <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
+                                        @endif
+                                    </form>
+                                </td>
                             </tr>
                             @foreach(json_decode($order['products_cart'],true) as $prd)
                                 <tr class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900"></td>
-                                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$prd['id']}}</td>
+
                                     <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                         <img src="{{$prd['image']}}" alt="Image">
                                     </td>
