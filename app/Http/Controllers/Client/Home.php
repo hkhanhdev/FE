@@ -49,7 +49,7 @@ class Home extends Controller
     {
         $manu_id = $request->query('manu_id');
 //        dd($request->query('manu_id'));
-        $products_full_response = Http::get("http://localhost:8000/api/v1/products?id_manufacturer=$manu_id");
+        $products_full_response = Http::get("http://localhost:8000/api/v1/products",['id_manufacturer'=>$manu_id]);
         $products = $products_full_response->json()["data"];
         $manus_full_response = Http::get("http://localhost:8000/api/v1/manufacturers?perPage=30");
         $manus = $manus_full_response->json()['data'];
