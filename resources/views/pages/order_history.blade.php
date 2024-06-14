@@ -65,15 +65,15 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{$order['phone_number']}}</td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{$order['address']}}</td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                    @if($order['status_order'] == 1)
+                                    @if($order['status_order'] == "Pending")
                                         <button class="bg-yellow-400 rounded-full w-20 hover:cursor-auto">Pending</button>
-                                    @elseif($order['status_order'] == 2)
+                                    @elseif($order['status_order'] == "Delivering")
                                         <button class="bg-green-400 rounded-full w-20 hover:cursor-auto">Delivering</button>
-                                    @elseif($order['status_order'] == 3)
+                                    @elseif($order['status_order'] == "Delivered")
                                         <button class="bg-green-400 rounded-full w-20 hover:cursor-auto">Delivered</button>
-                                    @elseif($order['status_order'] == 4)
+                                    @elseif($order['status_order'] == "Success")
                                         <button class="bg-green-500 rounded-full w-20 hover:cursor-auto">Completed</button>
-                                    @elseif($order['status_order'] == 5)
+                                    @elseif($order['status_order'] == "Canceled")
                                         <button class="bg-red-500 rounded-full w-20 hover:cursor-auto">Canceled</button>
                                     @endif
                                 </td>
@@ -81,21 +81,21 @@
                                     <form action="/order_history" method="POST" class="flex gap-2">
                                         @csrf
                                         <input type="hidden" value="{{$order['id']}}" name="ord_id">
-                                        @if($order['status_order'] == 1)
+                                        @if($order['status_order'] == "Pending")
                                             <input type="hidden" value="5" name="mode">
                                             <button type="submit" class="bg-red-400 rounded-full w-20 hover:scale-105">Cancel</button>
                                             <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
-                                        @elseif($order['status_order'] == 2)
+                                        @elseif($order['status_order'] == "Delivering")
                                             <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
                                             <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
-                                        @elseif($order['status_order'] == 3)
+                                        @elseif($order['status_order'] == "Delivered")
                                             <input type="hidden" value="4" name="mode">
                                             <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
                                             <button type="submit" class="bg-green-400 rounded-full w-20 hover:scale-105">Received</button>
-                                        @elseif($order['status_order'] == 4)
+                                        @elseif($order['status_order'] == "Success")
                                             <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
                                             <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
-                                        @elseif($order['status_order'] == 5)
+                                        @elseif($order['status_order'] == "Canceled")
                                             <button class="bg-red-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Cancel</button>
                                             <button class="bg-green-400 rounded-full w-20 hover:cursor-not-allowed disabled:opacity-50" disabled>Received</button>
                                         @endif

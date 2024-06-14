@@ -94,8 +94,16 @@ class Home extends Controller
 
     public function updateOrdStatus(Request $request)
     {
+        $cancel_endpoint = "http://127.0.0.1:8000/api/v1/orders/cancel";
+        $confirm_endpoint = "http://127.0.0.1:8000/api/v1/orders/confirm";
         $cre = $request->only(['ord_id','mode']);
-
+        if ($cre['mode'] == 4) {
+            $res = Http::post($confirm_endpoint,['token'=>session()->get('access_token'),'id'=>$cre['ord_id']]);
+        }elseif ($cre['mode'] == 5) {
+            $res = Http::post($cancel_endpoint,['token'=>session()->get('access_token'),'id'=>$cre['ord_id']]);
+        }else {
+            dd("Failed");
+        }
         return redirect()->route('order_history');
     }
     public function updateInfo(Request $request)
